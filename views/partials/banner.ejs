@@ -1,0 +1,31 @@
+<div class="banner">
+    <p>
+        <span class="title_banner">Voting App</span><br>
+        This project is part of the <a href="https://www.freecodecamp.com/challenges/build-a-voting-app" target="_blank">
+            Free Code Camp
+        </a> curriculum
+    </p>
+    <p>
+        here you can vote and create pulls with instant chart results
+    </p>
+</div>
+<div class="page-content">
+    <div class="content-grid mdl-grid">
+        <% data.forEach(function(item){ %>
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone">
+            <div class="card-wide mdl-card mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text pull_title"><%= item.title%></h2>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-js-button mdl-button--accent" href=<%='/pull/'+item.id %>>
+                        Vote
+                    </a>
+                    <div class="mdl-layout-spacer"></div>
+                    <h5><%= item.count%></h5>
+                </div>
+            </div>
+        </div>
+        <%})%>
+    </div>
+</div>

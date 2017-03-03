@@ -1,0 +1,166 @@
+div.share > a:link, div.share > a:visited, div.share > a:active, div.share > a:hover {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    padding:10px;
+    border-radius: 0;
+    color: #fff;
+}
+.body{
+    background-color:#efefef;
+}
+.twitter{
+    background-color: #00aced;
+}
+
+.facebook{
+    background-color: #3b5998;
+}
+.hide{
+    display:none;
+}
+.error_message{
+    margin-top: 20px;
+    color: red;
+    font-size: 2em;
+}
+.menu >.home {
+    color: #212121;
+}
+.menu > .new-pull{
+    color:#ff5722;
+}
+
+.mdl-menu > li > a {
+    display: block;
+    text-decoration: none;
+
+}
+
+.banner{
+    position: relative;
+    height: 200px;
+    width: auto;
+    background-color:#efefef;
+    /*background: url(images/slide01.jpg) center 30% no-repeat;*/
+    background-size: cover;
+    text-align: center;
+    color:#212121;
+    padding-top: 50px;
+}
+.banner > p{
+    display: block;
+    font-size: 20px;
+    line-height: 1.25;
+    margin: 0;
+}
+.content-grid{
+    justify-content: center;
+    align-items: center;
+
+}
+.title_banner{
+    font-size: 40px;
+    font-family: 'Righteous', cursive;
+}
+.card-wide.mdl-card{
+    width: auto;
+    min-height: 50px;
+}
+.card-wide > .mdl-card__actions {
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+}
+.mdl-textfield{
+    width: 90%;
+}
+.mdl-cell{
+    background-color: #fff;
+}
+.mypull-table{
+    table-layout: fixed;
+    width: 100%;
+}
+
+.mypull-table>caption{
+    color: #212121;
+    font-weight:bold;
+}
+
+.mypull-table td >a:nth-child(1):link,
+.mypull-table td >a:nth-child(1):visited,
+.mypull-table td >a:nth-child(1):active,
+.mypull-table td >a:nth-child(1):hover {
+    display: block;
+    width: auto;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 0;
+
+}
+.mypull-table td, th{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mdl-data-table td:last-of-type, .mdl-data-table th:last-of-type {
+    width: 50px;
+    padding-right: 40px;
+}
+
+.mdl-list{
+    width: 90%;
+}
+
+.mdl-list__item {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    line-height: 1;
+    height: 8px;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding: 16px;
+    cursor: default;
+    color: rgba(0,0,0,.87);
+    overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,.12);
+}
+#title{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: .04em;
+}
+
+textarea {
+    resize: none;
+}
+ul.contact{
+    font-size: 24px;
+    line-height: 24px;
+    color: #fff;
+}
+@media only screen and (max-device-width: 412px){
+    .mypull-table td, th{
+      white-space: normal;
+    }
+    .banner > p{
+        font-size: 16px;
+
+    }
+    .pull_title{
+        font-size: 1.2em;
+    }
+    #title{
+        font-size: 18px;
+    }
+
+}

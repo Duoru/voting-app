@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+    <meta property="og:url"           content="https://aqueous-tor-40691.herokuapp.com" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content='<%= title %>' />
+    <meta property="og:description"   content='<%= 'Vote for ' + description %>' />
+    <meta property="og:image"         content="http://intuitivevoting.com/assets/images/icon-voter-app.png"/>
+    <title><%=title%></title>
+    <style>
+        .mdl-layout__content{
+            padding: 15px;
+            font-family: "Roboto","Helvetica","Arial",sans-serif;
+        }
+        ul>li:nth-child(1){
+            border: none;
+        }
+        .mdl-grid{
+            position: relative;
+        }
+        .share{
+            height:auto;
+            position: absolute;
+            right:10px;
+            top:10px;
+        }
+        @media only screen and (max-device-width: 412px){
+            .mdl-layout__content{
+                padding: 0;
+            }
+            .share{
+                width: 100%;
+                position: relative;
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+<!--Facebook SDK-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+    <% include ../partials/header.ejs %>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+
+            <div class="mdl-grid mdl-shadow--6dp">
+
+
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
+                    <form id="vote" action="/pull/vote" method="post">
+                        <input type="hidden" value='<%= id %>' name="id">
+                        <label id="title"><%=title%></label>
+                        <ul class='mdl-list'>
+                            <% data.forEach(function(item,index){ %>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content"><%= item.name %></span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for='<%= index %>'>
+                                            <input type="radio" id='<%= index %>' class="mdl-radio__button" name="vote" value='<%= index %>'  />
+                                         </label>
+                                    </span>
+                                </li>
+                            <% }) %>
+                        </ul>
+                        <% if(user !==""){%>
+                            <a href="javascript:void(0)" id="own">I would like another option</a>
+                            <br>
+                        <%}%>
+                        <div id="moreoption" class="hide">
+                            <label for="textoption">Type a custom option:</label>
+                            <input type="text" name="textoption" >
+                        </div>
+                        <input type="submit" value="Vote" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    </form>
+                </div>
+                <div class="share">
+                    <button id="share_menu" style="margin-right: 12px"
+                            class="mdl-button mdl-js-button mdl-button--icon">
+                        <i class="material-icons">share</i>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                        for="share_menu">
+                        <li class="mdl-menu__item">
+                            <a href='https://twitter.com/share?url=<%= 'https://'+url + '&text=' + title%>' target="_blank">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                Twitter
+                            </a>
+                        </li>
+                        <li class="mdl-menu__item">
+                            <a data-href='<%= 'https://'+url%>'
+                               href='https://www.facebook.com/sharer/sharer.php?u=<%='https://'+url%>'
+                               class="fb-xfbml-parse-ignore" target="_blank">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
+                    <div>
+                        <canvas id="mychart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <% include ../partials/footer.ejs %>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#vote').submit(function (event) {
+            var isChecked = jQuery('input[name=vote]:checked').val();
+            var textoption=$('input[name=textoption]').val();
+            if(!isChecked && textoption==""){
+                alert("You have to select a option!");
+                event.preventDefault();
+                return
+            }
+
+            if(alreadyVoted()){
+                alert("you already voted!");
+                event.preventDefault();
+            }
+        });
+
+        $('#own').click(function () {
+            $('input[type="radio"]').removeAttr('required');
+            $('#moreoption').show();
+        });
+
+        function alreadyVoted(){
+            var rawVotes='<%- JSON.stringify(votes)%>';
+            var parseVotes=JSON.parse(rawVotes);
+            var result=parseVotes.find(function (element) {
+                return element=='<%= id %>'
+            })
+
+            return (result!==undefined)
+
+        }
+        console.log(alreadyVoted());
+    });
+
+   // var colorsSet=['#66c2a5','#fc8d62','#8da0cb','#e78ac3','#a6d854','#ffd92f','#e5c494','#b3b3b3'];
+    var colorsSet=[];
+    var rawdata='<%- JSON.stringify(data)%>';
+    var parseData=JSON.parse(rawdata);
+    var labels=[];
+    var dataValues=[];
+
+     parseData.forEach(function (item) {
+        labels.push(item.name);
+        dataValues.push(item.value);
+        colorsSet.push(randomColor());
+    });
+
+    console.log(labels);
+    console.log(dataValues);
+
+    var horizontalBarChart={
+            labels: labels,
+            datasets: [{
+                label: '# of Votes',
+                data: dataValues,
+                backgroundColor: colorsSet,
+                borderColor: colorsSet,
+                borderWidth: 1
+            }]
+    }
+
+    window.onload=function () {
+        var ctx = document.getElementById("mychart").getContext("2d");
+        window.myHorizontalChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data:horizontalBarChart,
+            options: {
+                responsive:true,
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

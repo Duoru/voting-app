@@ -1,0 +1,57 @@
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Voting App</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <nav class="menu mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link mdl-color--accent home" href="/">HOME</a>
+            <%if(!logged){%>
+                <a class="mdl-navigation__link" href="/login">Log In</a>
+            <%}else{%>
+                <a id="new-pull" class="mdl-navigation__link" href="/new">
+                    <i class="material-icons">add_circle_outline</i>
+                </a>
+                <button id="demo-menu-lower-right"
+                       class="mdl-button mdl-js-button mdl-button--icon">
+                   <i class="material-icons">account_circle</i>
+               </button>
+               <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                   for="demo-menu-lower-right">
+                   <li class="mdl-menu__item"><a href="/mypulls">My Pulls</a></li>
+                   <li class="mdl-menu__item"><a href="/logout">Log Out</a></li>
+               </ul>
+               <div class="user"><%= logged.name %></div>
+            <%}%>
+        </nav>
+    </div>
+</header>
+<div class="mdl-layout__drawer">
+    <%if(logged){%>
+        <span class="user mdl-layout-title"><%= logged.name %></span>
+    <%}%>
+    <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="/">
+            <i class="material-icons">home</i> Home
+        </a>
+        <%if(!logged){%>
+            <a class="mdl-navigation__link" href="/login">
+                <i class="material-icons">person</i> Log In
+            </a>
+        <%}else{%>
+            <a id="new-pull" class="mdl-navigation__link" href="/new">
+                <i class="material-icons">add_circle_outline</i> New Pull
+            </a>
+            <a class="mdl-navigation__link" href="/mypulls">
+                <i class="material-icons">folder</i> My Pulls
+            </a>
+            <a class="mdl-navigation__link" href="/logout">
+                <i class="material-icons">exit_to_app</i> Log Out
+            </a>
+        <%}%>
+    </nav>
+</div>
+<div class="mdl-tooltip" data-mdl-for="new-pull">
+    New Pull
+</div>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+    <title>My pulls</title>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+    <% include ../partials/header.ejs %>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="content-cell mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
+                    <table class="mypull-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                        <caption>MY PULLS</caption>
+                        <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">TITLE</th>
+                            <th class="mdl-data-table__cell--non-numeric"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% data.forEach(function(item){ %>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    <a href=<%='/pull/'+item.id %>><%= item.title%></a>
+                                </td>
+                                <td class="mdl-data-table__cell--non-numeric delete">
+                                    <a href='<%= '/mypulls/delete/' + item.id %>'>
+
+                                        <i class="material-icons" >delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <%})%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <% include ../partials/footer.ejs %>
+</div>
+</body>
+</html>

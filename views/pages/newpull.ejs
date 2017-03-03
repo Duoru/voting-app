@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+    <title>New pull</title>
+    <style>
+        .mdl-cell{
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="body">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+    <% include ../partials/header.ejs %>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone mdl-shadow--4dp">
+                    <form id="create" action="/new" method="POST">
+                        <h4>Create a new pull</h4>
+                        <div class="mdl-textfield mdl-js-textfield ">
+                            <input name="title" id="title" class="mdl-textfield__input" type="text" required autofocus>
+                            <label class="mdl-textfield__label" for="title">Title</label>
+                        </div>
+                        <br>
+                        <label for="#" style="color:#ff5722">You must write at least two options separated by newlines</label>
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <textarea name="optionlist" id="optionlist" class="mdl-textfield__input" type="text" rows= "8" required></textarea>
+                            <label class="mdl-textfield__label" for="optionlist">Option List e.g: <br>option 1 <br>option 2</label>
+                        </div>
+                        <button class="mdl-button mdl-js-button mdl-button--accent">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <% include ../partials/footer.ejs %>
+</div>
+<script>
+    $('#create').submit(function (event) {
+        var textArea = $('textarea[name=optionlist]').val().split(/\r?\n/g);
+        if(textArea.length <2){
+            alert("You must write at least two options separated by newlines");
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

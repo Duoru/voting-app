@@ -1,0 +1,37 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "Build a Voting App for Free Code Camp",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matosalexander/voting-app.git"
+  },
+  "author": "Alexander Matos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matosalexander/voting-app/issues"
+  },
+  "homepage": "https://github.com/matosalexander/voting-app#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.16.1",
+    "bson": "^1.0.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "mongodb": "^2.2.24",
+    "mongoose": "^4.8.2",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.4.1"
+  }
+}

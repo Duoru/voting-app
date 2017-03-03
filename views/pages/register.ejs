@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+    <title>Register</title>
+    <style>
+        form >.material-icons{
+            font-size: 80px;
+            text-align: center;
+            display: block;
+            color:dimgray;
+        }
+        form >.fa-address-card{
+            font-size: 80px;
+            text-align: center;
+            display: block;
+            color:dimgray;
+        }
+        .content-cell{
+             padding: 10px;
+         }
+    </style>
+</head>
+<body class="body">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+    <% include ../partials/header.ejs %>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="content-cell mdl-cell mdl-cell--6-col mdl-cell--6-col-phone mdl-shadow--6dp">
+                    <form action="/signup" method="POST">
+                        <!--<i class="material-icons">assignment</i>-->
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                        <div class="mdl-textfield mdl-js-textfield ">
+                            <input name="name" class="mdl-textfield__input" type="text" required autofocus>
+                            <label class="mdl-textfield__label" for="text1">Full Name</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield ">
+                            <input name="username" class="mdl-textfield__input" type="text" required>
+                            <label class="mdl-textfield__label" for="text1">Username</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield ">
+                            <input name="password" class="mdl-textfield__input" type="password" required>
+                            <label class="mdl-textfield__label" for="text1">Password</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield ">
+                            <input name="email" class="mdl-textfield__input" type="text" required>
+                            <label class="mdl-textfield__label" for="text1">Email</label>
+                        </div>
+                        <button class="mdl-button mdl-js-button mdl-button--accent">Register</button>
+                    </form>
+                </div>
+                <div id="message">
+                    <%= message%>
+                </div>
+            </div>
+        </div>
+    </main>
+    <% include ../partials/footer.ejs%>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+    <title>login</title>
+    <style>
+
+       .mdl-card{
+           width: 100%;
+
+       }
+       .content-cell{
+           height: 300px;
+
+       }
+       form >.material-icons{
+           font-size: 100px;
+           text-align: center;
+           display: block;
+       }
+       a.register{
+           float: right;
+       }
+
+    </style>
+</head>
+<body class="body">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+    <% include ../partials/header.ejs %>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="content-cell mdl-cell mdl-cell--4-col">
+                    <div class="mdl-card mdl-shadow--6dp">
+                        <div class="mdl-card__supporting-text">
+                            <form action="/login" method="POST">
+                                <i class="material-icons">person</i>
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input name="username" class="mdl-textfield__input" type="text" autofocus="autofocus" required />
+                                    <label class="mdl-textfield__label" for="username">Username</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input name="password" class="mdl-textfield__input" type="password" required />
+                                    <label class="mdl-textfield__label" for="userpass">Password</label>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--accent">Log in</button>
+                                <a href="/signup" class="mdl-button mdl-js-button mdl-button--accent register">Register</a>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="error_message"><%=message%></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <% include ../partials/footer.ejs %>
+</div>
+</body>
+</html>
